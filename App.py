@@ -15,7 +15,7 @@ st.header('Hello World Pokern')
 @st.cache_data(ttl=5)
 def load_data(sheets_url):
     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
-    return pd.read_csv(csv_url, sep=';', on_bad_lines='skip')
+    return pd.read_csv(csv_url, sep=',', on_bad_lines='skip')
 
 if st.button('Neuer DF'):
     df = load_data(st.secrets["public_gsheets_url"])
