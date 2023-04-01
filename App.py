@@ -30,4 +30,4 @@ spieler_ergebnis = {
     }
 
 if st.button('Abschicken'):
-    st.session_state['df'] = pd.concat([data, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+    st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
