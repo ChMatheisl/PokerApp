@@ -3,9 +3,7 @@ import pandas as pd
 st.header('Hello World Pokern')
 import datetime
 
-df = pd.DataFrame()
-if st.button('Aktueller Stand'):
-    st.dataframe(df)
+
 # @st.cache_data(ttl=5)
 # def load_data(sheets_url):
 #     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
@@ -15,6 +13,9 @@ if st.button('Aktueller Stand'):
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
 
+df = pd.DataFrame()
+if st.button('Aktueller Stand'):
+    st.dataframe(df)
 # Spieergbenis
 name = st.text_input('Wer bist du?', 'Niko')
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
@@ -27,5 +28,5 @@ spieler_ergebnis = {
     }
 
 if st.button('Abschicken'):
-    df = pd.concat([df, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
-    
+    #df = pd.concat([df, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+    df = df.append(pd.DataFrame.from_records([spieler_ergebnis]))
