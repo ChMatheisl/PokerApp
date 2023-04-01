@@ -16,7 +16,7 @@ conn = connect(credentials=credentials)
 
 sheet_url = st.secrets["private_gsheets_url"]
 
-@st.cache_data(ttl=600)
+@st.cache_resource(ttl=600)
 def run_query(query):
     rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
