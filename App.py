@@ -1,11 +1,19 @@
 import streamlit as st
 import pandas as pd
+import datetime
+from streamlit_option_menu import option_menu
+
 st.set_page_config(    
     page_title="Alexa, spiel Snake Jazz",
     page_icon="🎰",
     layout="wide",)
+
 st.header('Poker Tracking')
-import datetime
+
+
+choose = option_menu("App Gallery", ["About", "Photo Editing", "Project Planning", "Python e-Course", "Contact"],
+                         icons=['house', 'camera fill', 'kanban', 'book','person lines fill'],
+                         menu_icon="app-indicator", default_index=0,)
 
 
 # @st.cache_data(ttl=5)
@@ -17,26 +25,30 @@ import datetime
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
 
-if "df" not in st.session_state:
-    st.session_state['df'] = pd.DataFrame()
 
-# Spieergbenis
-name = st.text_input('Wer bist du?', 'Niko')
-einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
-abgang = st.slider('Wie viel hast du am Ende mitgenommen?', -50, 50, 10)
-spieler_ergebnis = { 
-    'Spieler': name,
-    'Einzahlung': einzahlung,
-    'Endstand': abgang,
-    'Datum': datetime.datetime.today()
-    }
+tab1, tab2, tab3 = st.tabs(["Neues Spiel", "Lifetimescore", "Visuals"])
 
-col1, col2, col3 = st.columns([1,1,1])
+with tab1:
+    if "df" not in st.session_state:
+        st.session_state['df'] = pd.DataFrame()
 
-if col1.button('Abschicken'):
-    st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+    # Spieergbenis
+    name = st.text_input('Wer bist du?', 'Niko')
+    einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
+    abgang = st.slider('Wie viel hast du am Ende mitgenommen?', -50, 50, 10)
+    spieler_ergebnis = { 
+        'Spieler': name,
+        'Einzahlung': einzahlung,
+        'Endstand': abgang,
+        'Datum': datetime.datetime.today()
+        }
 
-if col3.button('Reset Daten'):
-    st.session_state['df'] = pd.DataFrame()
+    col1, col2, col3 = st.columns([1,1,1])
 
-st.table(st.session_state['df'])
+    if col1.button('Abschicken'):
+        st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+
+    if col3.button('Reset Daten'):
+        st.session_state['df'] = pd.DataFrame()
+
+    st.table(st.session_state['df'])
