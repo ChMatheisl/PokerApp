@@ -22,7 +22,7 @@ if st.button('Neuer DF'):
     st.dataframe(df)
 
 st.subheader('Wer bist du?')
-spieler = ['Chris', 'Niko', 'Steffen', 'Basti', 'Philip', 'Niko']
+spieler = ['Chris', 'Niko', 'Steffen', 'Basti', 'Philip', 'Niko2']
 cols = st.columns([1 for x in spieler])
 for i, name in enumerate(spieler):
     cols[i].button(name)
