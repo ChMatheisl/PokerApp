@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-st.header('Hello World Pokern')
+st.header('Poker Tracking')
 import datetime
 
 # @st.cache_data(ttl=5)
@@ -18,7 +18,7 @@ if "df" not in st.session_state:
 # Spieergbenis
 name = st.text_input('Wer bist du?', 'Niko')
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
-abgang = st.slider('Wie viel hast du am Ende mitgenommen?', 0, 50, 10)
+abgang = st.slider('Wie viel hast du am Ende mitgenommen?', -50, 50, 10)
 spieler_ergebnis = { 
     'Spieler': name,
     'Einzahlung': einzahlung,
@@ -34,4 +34,4 @@ if col1.button('Abschicken'):
 if col3.button('Reset Daten'):
     st.session_state['df'] = pd.DataFrame()
 
-st.dataframe(st.session_state['df'])
+st.table(st.session_state['df'])
