@@ -26,10 +26,12 @@ conn = connect(credentials=credentials)
 sheet_url = st.secrets["private_gsheets_url"]
 @st.cache_resource(ttl=600)
 def run_query(query):
-    rows = conn.execute(query, headers=1)
+    rows = conn.execute(query, headers=0)
     rows = rows.fetchall()
     return rows
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
+ 
+run_query(f'INSERT INTO "{sheet_url}" Values Niko, 10, 23, Heute')
 st.write(rows)
 
 # @st.cache_data(ttl=5)
