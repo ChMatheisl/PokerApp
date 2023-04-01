@@ -31,7 +31,7 @@ def run_query(query):
     return rows
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
  
-run_query(f'INSERT INTO "{sheet_url}" Values Niko, 10, 23, Heute')
+conn.execute(f'INSERT INTO "{sheet_url}" Values Niko, 10, 23, Heute')
 st.write(rows)
 
 # @st.cache_data(ttl=5)
