@@ -11,8 +11,9 @@ import datetime
 # if st.button('Neuer DF'):
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
-data = pd.DataFrame()
-st.session_state['df'] = data
+
+if "df_result" not in st.session_state:
+    st.session_state['df'] = pd.DataFrame()
 
 if st.button('Aktueller Stand'):
     st.dataframe(st.session_state['df'])
@@ -29,4 +30,4 @@ spieler_ergebnis = {
     }
 
 if st.button('Abschicken'):
-    st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+    st.session_state['df'] = pd.concat([data, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
