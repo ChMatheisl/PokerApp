@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 st.header('Hello World Pokern')
 import datetime
-
+import SessionState
 
 # @st.cache_data(ttl=5)
 # def load_data(sheets_url):
@@ -12,11 +12,12 @@ import datetime
 # if st.button('Neuer DF'):
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
+data = pd.DataFrame()
+session_state = SessionState.get(df=data)
 
-if st.button('Neuer Dataframe'):
-    df = pd.DataFrame()
 if st.button('Aktueller Stand'):
-    st.dataframe(df)
+    st.dataframe(session_state.df)
+
 # Spieergbenis
 name = st.text_input('Wer bist du?', 'Niko')
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
@@ -29,5 +30,4 @@ spieler_ergebnis = {
     }
 
 if st.button('Abschicken'):
-    #df = pd.concat([df, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
-    df = df.append(pd.DataFrame.from_records([spieler_ergebnis]))
+    session_state.df = pd.concat([session_state.df, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
