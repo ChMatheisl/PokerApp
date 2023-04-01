@@ -15,7 +15,7 @@ data = pd.DataFrame()
 st.session_state['df'] = data
 
 if st.button('Aktueller Stand'):
-    st.dataframe(st.session_state.df)
+    st.dataframe(st.session_state['df'])
 
 # Spieergbenis
 name = st.text_input('Wer bist du?', 'Niko')
@@ -29,4 +29,4 @@ spieler_ergebnis = {
     }
 
 if st.button('Abschicken'):
-    st.session_state.df = pd.concat([st.session_state.df, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+    st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
