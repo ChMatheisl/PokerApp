@@ -1,13 +1,22 @@
 import streamlit as st
 import pandas as pd
 st.header('Hello World Pokern')
-df = pd.read_excel('Test Tabelle.xlsx')
-col1, col2, col3 = st.columns([1,1,1])
-if col2.button('Click'):
-    st.table(df)
-if col3.button('Add Column'):
-    st.subheader('Wer bist du?') 
-    df['Neuer col'] = 'Test lul'
-    df.to_excel('Test Tabelle.xlsx')
+#df = pd.read_excel('Test Tabelle.xlsx')
+#col1, col2, col3 = st.columns([1,1,1])
+#if col2.button('Click'):
+#    st.table(df)
+#if col3.button('Add Column'):
+#    st.subheader('Wer bist du?') 
+#    df['Neuer col'] = 'Test lul'
+#    df.to_excel('Test Tabelle.xlsx')
 #age = st.slider('How old are you?', 0, 130, 25)
 #st.write("I'm ", age, 'years old')
+
+@st.cache_data(ttl=600)
+def load_data(sheets_url):
+    csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
+    return pd.read_csv(csv_url)
+
+if st.button('Neuer DF'):
+    df = load_data(st.secrets["public_gsheets_url"])
+    st.dataframe(df)
