@@ -28,4 +28,5 @@ spieler_ergebnis = {
 
 if st.button('Abschicken'):
     df = pd.concat([df, pd.DataFrame.from_records([spieler_ergebnis])])
-    st.dataframe(df)
+    
+st.dataframe(df)
