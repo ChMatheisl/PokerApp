@@ -2,15 +2,12 @@ import streamlit as st
 import pandas as pd
 import datetime
 from streamlit_option_menu import option_menu
-import gspread
-
+#import gspread
 
 st.set_page_config(    
     page_title="Alexa, spiel Snake Jazz",
     page_icon="🎰",
     layout="wide",)
-
-
 
 choose = option_menu("Poker Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
                          icons=['house', 'camera fill', 'kanban'],
@@ -21,10 +18,10 @@ choose = option_menu("Poker Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
 # def load_data(sheets_url):
 #     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
 #     return pd.read_csv(csv_url, sep=',', on_bad_lines='skip')
-gc = gspread.service_account()
-sh = gc.open_by_url(st.secrets["public_gsheets_url"])
-worksheet = sh.get_worksheet(0)
-st.write(worksheet)
+#gc = gspread.service_account()
+#sh = gc.open_by_url(st.secrets["public_gsheets_url"])
+#worksheet = sh.get_worksheet(0)
+#st.write(worksheet)
 #worksheet.update([dataframe.columns.values.tolist()] + dataframe.values.tolist())
 
 # if st.button('Neuer DF'):
