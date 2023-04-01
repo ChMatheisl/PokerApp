@@ -15,9 +15,6 @@ import datetime
 if "df" not in st.session_state:
     st.session_state['df'] = pd.DataFrame()
 
-if st.button('Aktueller Stand'):
-    st.dataframe(st.session_state['df'])
-
 # Spieergbenis
 name = st.text_input('Wer bist du?', 'Niko')
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
@@ -31,3 +28,5 @@ spieler_ergebnis = {
 
 if st.button('Abschicken'):
     st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+
+st.dataframe(st.session_state['df'])
