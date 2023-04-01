@@ -11,6 +11,8 @@ import datetime
 # if st.button('Neuer DF'):
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
+if st.button('Reset Daten'):
+    st.session_state['df'] = pd.DataFrame()
 
 if "df" not in st.session_state:
     st.session_state['df'] = pd.DataFrame()
