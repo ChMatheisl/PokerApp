@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 st.header('Hello World Pokern')
 import datetime
-import SessionState
 
 # @st.cache_data(ttl=5)
 # def load_data(sheets_url):
