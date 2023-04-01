@@ -13,7 +13,8 @@ import datetime
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
 
-df = pd.DataFrame()
+if st.button('Neuer Dataframe'):
+    df = pd.DataFrame()
 if st.button('Aktueller Stand'):
     st.dataframe(df)
 # Spieergbenis
