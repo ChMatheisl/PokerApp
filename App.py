@@ -4,7 +4,8 @@ st.header('Hello World Pokern')
 import datetime
 
 df = pd.DataFrame()
-
+if st.button('Aktueller Stand'):
+    st.dataframe(df)
 # @st.cache_data(ttl=5)
 # def load_data(sheets_url):
 #     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
@@ -26,6 +27,5 @@ spieler_ergebnis = {
     }
 
 if st.button('Abschicken'):
-    df = pd.concat([df, pd.DataFrame.from_records([spieler_ergebnis])])
+    df = pd.concat([df, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
     
-st.dataframe(df)
