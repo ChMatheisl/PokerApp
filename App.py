@@ -12,7 +12,7 @@ st.header('Hello World Pokern')
 #age = st.slider('How old are you?', 0, 130, 25)
 #st.write("I'm ", age, 'years old')
 
-@st.cache_data(ttl=600)
+@st.cache_data(ttl=5)
 def load_data(sheets_url):
     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
     return pd.read_csv(csv_url, sep=';', on_bad_lines='skip')
