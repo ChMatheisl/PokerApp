@@ -13,10 +13,10 @@ import SessionState
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
 data = pd.DataFrame()
-session_state = SessionState.get(df=data)
+st.session_state['df'] = data
 
 if st.button('Aktueller Stand'):
-    st.dataframe(session_state.df)
+    st.dataframe(st.session_state.df)
 
 # Spieergbenis
 name = st.text_input('Wer bist du?', 'Niko')
@@ -30,4 +30,4 @@ spieler_ergebnis = {
     }
 
 if st.button('Abschicken'):
-    session_state.df = pd.concat([session_state.df, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+    st.session_state.df = pd.concat([st.session_state.df, pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
