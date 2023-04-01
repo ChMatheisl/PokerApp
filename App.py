@@ -24,5 +24,5 @@ if st.button('Neuer DF'):
 st.subheader('Wer bist du?')
 cols = st.columns([1,1,1])
 for i, name in enumerate(['Chris', 'Niko', 'Steffen']):
-    cols[i] = st.button(name)
+    cols[i].button(name)
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 30, 10)
