@@ -22,12 +22,13 @@ if st.button('Neuer DF'):
     df = load_data(st.secrets["public_gsheets_url"])
     st.dataframe(df)
 
+df = pd.DataFrame()
+# Spieergbenis
 name = st.text_input('Wer bist du?', 'Niko')
-
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
 abgang = st.slider('Wie viel hast du am Ende mitgenommen?', 0, 50, 10)
-
 spieler_ergebnis = { 'Spieler': name, 'Einzahlung': einzahlung, 'Endstand': abgang, 'Datum': datetime.datetime.today()}
+
 if st.button('Abschicken'):
     df = pd.concat([df, pd.DataFrame.from_records([spieler_ergebnis])])
     st.dataframe(df)
