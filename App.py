@@ -25,5 +25,6 @@ st.subheader('Wer bist du?')
 spieler = ['Chris', 'Niko', 'Steffen', 'Basti', 'Philip', 'Niko2']
 cols = st.columns([1 for x in spieler])
 for i, name in enumerate(spieler):
-    cols[i].button(name)
+    if cols[i].button(name):
+        st.subhead(f'Du bist {name}')
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 30, 10)
