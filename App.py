@@ -22,5 +22,7 @@ if st.button('Neuer DF'):
     st.dataframe(df)
 
 st.subheader('Wer bist du?')
-st.button('Chris')
+cols = st.columns([1,1,1])
+for i, name in enumerate(['Chris', 'Niko', 'Steffen']):
+    cols[i] = st.button(name)
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 30, 10)
