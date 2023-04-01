@@ -5,15 +5,14 @@ import datetime
 
 df = pd.DataFrame()
 
+# @st.cache_data(ttl=5)
+# def load_data(sheets_url):
+#     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
+#     return pd.read_csv(csv_url, sep=',', on_bad_lines='skip')
 
-@st.cache_data(ttl=5)
-def load_data(sheets_url):
-    csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
-    return pd.read_csv(csv_url, sep=',', on_bad_lines='skip')
-
-if st.button('Neuer DF'):
-    df = load_data(st.secrets["public_gsheets_url"])
-    st.dataframe(df)
+# if st.button('Neuer DF'):
+#     df = load_data(st.secrets["public_gsheets_url"])
+#     st.dataframe(df)
 
 # Spieergbenis
 name = st.text_input('Wer bist du?', 'Niko')
