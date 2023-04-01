@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 st.header('Hello World Pokern')
+import datetime
 #df = pd.read_excel('Test Tabelle.xlsx')
 #col1, col2, col3 = st.columns([1,1,1])
 #if col2.button('Click'):
@@ -21,10 +22,10 @@ if st.button('Neuer DF'):
     df = load_data(st.secrets["public_gsheets_url"])
     st.dataframe(df)
 
-st.subheader('Wer bist du?')
-spieler = ['Chris', 'Niko', 'Steffen', 'Basti', 'Philip', 'Niko2']
-cols = st.columns([1 for x in spieler])
-for i, name in enumerate(spieler):
-    if cols[i].button(name):
-        st.subheader(f'Du bist {name}')
-einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 30, 10)
+name = st.text_input('Wer bist du?', 'Niko')
+
+einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
+if st.button('Abschicken'):
+    df.loc[df['Spieler']==name, 'Einzahlung'] = einzahlung
+    df.loc[df['Spieler']==name, 'Datum'] =  datetime.datime.today()
+    st.dataframe(df)
