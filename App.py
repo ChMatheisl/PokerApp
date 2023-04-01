@@ -21,4 +21,6 @@ if st.button('Neuer DF'):
     df = load_data(st.secrets["public_gsheets_url"])
     st.dataframe(df)
 
+st.subheader('Wer bist du?')
+st.button('Chris')
 einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 30, 10)
