@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
-st.header('Poker Tracking')
-import datetime
-
 st.set_page_config(    
     page_title="Alexa, spiel Snake Jazz",
     page_icon="🎰",
     layout="wide",)
+st.header('Poker Tracking')
+import datetime
+
+
 # @st.cache_data(ttl=5)
 # def load_data(sheets_url):
 #     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
