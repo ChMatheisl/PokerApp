@@ -13,7 +13,6 @@ credentials = service_account.Credentials.from_service_account_info(
     ],
 )
 
-
 st.set_page_config(    
     page_title="Alexa, spiel Snake Jazz",
     page_icon="🎰",
@@ -56,7 +55,7 @@ if choose == "Neues Spiel":
     einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
     datum = st.date_input(
     "Wann?",
-    datetime.dateime.today())
+    datetime.datetime.today())
     abgang = st.slider('Wie viel hast du am Ende mitgenommen?', 0, 50, 10)
     spieler_ergebnis = { 
         'Spieler': name,
