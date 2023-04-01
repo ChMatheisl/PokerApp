@@ -11,9 +11,10 @@ st.set_page_config(
 st.header('Poker Tracking')
 
 
-choose = option_menu("App Gallery", ["About", "Photo Editing", "Project Planning", "Python e-Course", "Contact"],
-                         icons=['house', 'camera fill', 'kanban', 'book','person lines fill'],
-                         menu_icon="app-indicator", default_index=0,)
+choose = option_menu("App Gallery", ["Neues Spiel", "Scoreboard", "Visuals"],
+                         icons=['house', 'camera fill', 'kanban'],
+                         menu_icon="app-indicator", default_index=0,
+                         orientation='horizontal')
 
 
 # @st.cache_data(ttl=5)
@@ -25,10 +26,7 @@ choose = option_menu("App Gallery", ["About", "Photo Editing", "Project Planning
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
 
-
-tab1, tab2, tab3 = st.tabs(["Neues Spiel", "Lifetimescore", "Visuals"])
-
-with tab1:
+if choose == "Neues Spiel":
     if "df" not in st.session_state:
         st.session_state['df'] = pd.DataFrame()
 
