@@ -12,7 +12,7 @@ import datetime
 #     df = load_data(st.secrets["public_gsheets_url"])
 #     st.dataframe(df)
 
-if "df_result" not in st.session_state:
+if "df" not in st.session_state:
     st.session_state['df'] = pd.DataFrame()
 
 if st.button('Aktueller Stand'):
