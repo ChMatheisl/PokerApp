@@ -12,16 +12,7 @@ credentials = service_account.Credentials.from_service_account_info(
         "https://www.googleapis.com/auth/spreadsheets",
     ],
 )
-conn = connect(credentials=credentials)
 
-sheet_url = st.secrets["private_gsheets_url"]
-
-@st.cache_resource(ttl=600)
-def run_query(query):
-    rows = conn.execute(query, headers=1)
-    rows = rows.fetchall()
-    return rows
-rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 st.set_page_config(    
     page_title="Alexa, spiel Snake Jazz",
@@ -31,6 +22,15 @@ choose = option_menu("Poker Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
                          icons=['house', 'camera fill', 'kanban'],
                          menu_icon="app-indicator", default_index=0,
                          orientation='horizontal')
+conn = connect(credentials=credentials)
+
+sheet_url = st.secrets["private_gsheets_url"]
+@st.cache_resource(ttl=600)
+def run_query(query):
+    rows = conn.execute(query, headers=1)
+    rows = rows.fetchall()
+    return rows
+rows = run_query(f'SELECT * FROM "{sheet_url}"')
 st.write(rows)
 
 # @st.cache_data(ttl=5)
