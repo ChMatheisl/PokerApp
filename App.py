@@ -7,14 +7,6 @@ from google.oauth2 import service_account
 #from gsheetsdb import connect
 
 from shillelagh.backends.apsw.db import connect
-
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-    ],
-)
-
 st.set_page_config(    
     page_title="Alexa, spiel Snake Jazz",
     page_icon="🎰",
@@ -23,18 +15,43 @@ choose = option_menu("Poker Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
                          icons=['house', 'camera fill', 'kanban'],
                          menu_icon="app-indicator", default_index=0,
                          orientation='horizontal')
-conn = connect(":memory:", adapter_kwargs=credentials)
 
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+    ],
+)
+adapter_kwargs={
+            "gsheetsapi" : { 
+            "service_account_info" : {
+                "type" : st.secrets["gcp_service_account"]["type"],
+                "project_id" : st.secrets["gcp_service_account"]["project_id"],
+                "private_key_id" : st.secrets["gcp_service_account"]["private_key_id"],
+                "private_key" : st.secrets["gcp_service_account"]["private_key"],
+                "client_email" : st.secrets["gcp_service_account"]["client_email"],
+                "client_id" : st.secrets["gcp_service_account"]["client_id"],
+                "auth_uri" : st.secrets["gcp_service_account"]["auth_uri"],
+                "token_uri" : st.secrets["gcp_service_account"]["token_uri"],
+                "auth_provider_x509_cert_url" : st.secrets["gcp_service_account"]["auth_provider_x509_cert_url"],
+                "client_x509_cert_url" : st.secrets["gcp_service_account"]["client_x509_cert_url"]
+            }}}
+
+conn = connect(":memory:", adapter_kwargs=adapter_kwargs)
+cursor = conn.cursor()
 sheet_url = st.secrets["private_gsheets_url"]
-@st.cache_resource(ttl=600)
-def run_query(query):
-    rows = conn.execute(query, headers=0)
-    rows = rows.fetchall()
-    return rows
-rows = run_query(f'SELECT * FROM "{sheet_url}"')
+query = f'INSERT INTO "{sheet_url}" VALUES ("Test1", "Test2", "Test3", Test4")'
+cursor.execute(query)
+# sheet_url = st.secrets["private_gsheets_url"]
+# @st.cache_resource(ttl=600)
+# def run_query(query):
+#     rows = conn.execute(query, headers=0)
+#     rows = rows.fetchall()
+#     return rows
+# rows = run_query(f'SELECT * FROM "{sheet_url}"')
  
-conn.execute(f'INSERT INTO "{sheet_url}" Values Niko, 10, 23, Heute')
-st.write(rows)
+# conn.execute(f'INSERT INTO "{sheet_url}" Values Niko, 10, 23, Heute')
+# st.write(rows)
 
 # @st.cache_data(ttl=5)
 # def load_data(sheets_url):
