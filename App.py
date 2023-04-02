@@ -115,4 +115,4 @@ if choose == "Visuals":
     full = cursor.execute(query)
     full = pd.DataFrame(full).rename(columns={0: 'Spieler', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
     full['Diff'] = full['Einzahlung'] - full['Endstand']
-    st.line_chart(x=full['Datum'], y=full['Einzahlung'])
+    st.line_chart(full, x='Datum', y='Einzahlung')
