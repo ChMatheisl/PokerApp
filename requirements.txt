@@ -2,5 +2,5 @@ pandas
 openpyxl
 streamlit-option-menu
 pyparsing
-shillelagh
+shillelagh==1.0.1
 shillelagh[gsheetsapi]
