@@ -92,6 +92,7 @@ if choose == "Neues Spiel":
         query = f'INSERT INTO "{sheet_url}" SELECT (?, ?, ?, ?)'
         parameter = {'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum}
         #query = f'INSERT INTO "{sheet_url}" SELECT {name}, {einzahlung}, {abgang}, {datum}'
+        st.write(tuple(parameter.values()))
         cursor.execute(query, tuple(parameter.values()))
         #st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
 
