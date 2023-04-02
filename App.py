@@ -88,9 +88,6 @@ if choose == "Neues Spiel":
 
     col1, col2, col3 = st.columns([1,1,1])
 
-    with col1:
-        st.write(' ')
-
     style = "<style>.row-widget.stButton {text-align: center;}</style>"
     st.markdown(style, unsafe_allow_html=True)
     if col2.button('Abschicken'):
@@ -99,16 +96,19 @@ if choose == "Neues Spiel":
         st.dataframe(parameter)
         cursor.execute(query, tuple(parameter.values()))
 
-    with col3:
-        st.button('Test')
-
 if choose == "Scoreboard":
-
+    hide_table_row_index = """
+            <style>
+            thead tr th:first-child {display:none}
+            tbody th {display:none}
+            </style>
+            """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
     col4, col5, col6 = st.columns([1,1,1])
     query = f'SELECT * FROM "{sheet_url}"'
     full = cursor.execute(query)
     full = pd.DataFrame(full).rename(columns={0: 'Name', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
-    col5.dataframe(full)
+    col5.table(full)
 
 if choose == "Visuals":
     if "df" not in st.session_state:
