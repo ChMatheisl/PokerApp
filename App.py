@@ -100,7 +100,7 @@ if choose == "Neues Spiel":
         cursor.execute(query, tuple(parameter.values()))
 
     with col3:
-        st.write(' ')
+        st.button('Test')
 
 if choose == "Scoreboard":
 
