@@ -118,3 +118,10 @@ if choose == "Visuals":
     full = full.groupby('Datum')['Einzahlung'].sum().reset_index()
     st.subheader('Einzahlung je Datum')
     st.line_chart(full, x='Datum', y='Einzahlung')
+    
+    st.subheader('Einzahlung bestimmter Spieler')
+    spieler = list(full['Spieler'].unique())
+    aktuelle_auswahl = st.selectbox('Spieler', spieler)
+    sub = full[full['Spieler']==aktuelle_auswahl]
+    st.line_chart(sub, x='Datum', y='Einzahlung')
+    st.bar_chart(sub, x='Datum', y='Diff')
