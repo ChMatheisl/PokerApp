@@ -40,7 +40,7 @@ adapter_kwargs={
 conn = connect(":memory:", adapter_kwargs=adapter_kwargs)
 cursor = conn.cursor()
 sheet_url = st.secrets["private_gsheets_url"]
-query = f'INSERT INTO "{sheet_url}" VALUES ("Test1", "Test2", "Test3", Test4")'
+query = f'SELECT * FROM {sheet_url}'
 cursor.execute(query)
 # sheet_url = st.secrets["private_gsheets_url"]
 # @st.cache_resource(ttl=600)
