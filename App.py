@@ -81,7 +81,7 @@ if choose == "Neues Spiel":
         'Spieler': name,
         'Einzahlung': einzahlung,
         'Endstand': abgang,
-        'Datum': datum
+        'Datum': '30.01.23' #datum
         }
     for value in spieler_ergebnis.values():
         pass
@@ -89,7 +89,7 @@ if choose == "Neues Spiel":
     col1, col2, col3 = st.columns([1,1,1])
 
     if col1.button('Abschicken'):
-        query = f'INSERT INTO "{sheet_url}" SELECT (?, ?, ?, ?)'
+        query = f'INSERT INTO "{sheet_url}" VALUES (?, ?, ?, ?)'
         parameter = {'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum}
         #query = f'INSERT INTO "{sheet_url}" SELECT {name}, {einzahlung}, {abgang}, {datum}'
         st.write(tuple(parameter.values()))
