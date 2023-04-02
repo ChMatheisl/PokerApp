@@ -114,6 +114,5 @@ if choose == "Visuals":
     query = f'SELECT * FROM "{sheet_url}"'
     full = cursor.execute(query)
     full = pd.DataFrame(full).rename(columns={0: 'Spieler', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
-    full['Diff'] = full['Einzahlung'] - full['Auszahlung']
+    full['Diff'] = full['Einzahlung'] - full['Endstand']
     st.line_chart(full[['Datum', 'Diff']])
-    
