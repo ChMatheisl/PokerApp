@@ -107,30 +107,11 @@ if choose == "Scoreboard":
     col4, col5, col6 = st.columns([1,1,1])
     query = f'SELECT * FROM "{sheet_url}"'
     full = cursor.execute(query)
-    full = pd.DataFrame(full).rename(columns={0: 'Name', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
+    full = pd.DataFrame(full).rename(columns={0: 'Spieler', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
     col5.table(full)
 
 if choose == "Visuals":
-    if "df" not in st.session_state:
-        st.session_state['df'] = pd.DataFrame()
-
-    # Spieergbenis
-    name = st.text_input('Wer bist du?', 'Niko')
-    einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
-    abgang = st.slider('Wie viel hast du am Ende mitgenommen?', -50, 50, 10)
-    spieler_ergebnis = { 
-        'Spieler': name,
-        'Einzahlung': einzahlung,
-        'Endstand': abgang,
-        'Datum': datetime.datetime.today()
-        }
-
-    col1, col2, col3 = st.columns([1,1,1])
-
-    if col1.button('Abschicken'):
-        st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
-
-    if col3.button('Reset Daten'):
-        st.session_state['df'] = pd.DataFrame()
-
-    st.table(st.session_state['df'])
+    query = f'SELECT * FROM "{sheet_url}"'
+    full = cursor.execute(query)
+    full = pd.DataFrame(full).rename(columns={0: 'Spieler', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
+    st.linechart(full, hue='Name')
