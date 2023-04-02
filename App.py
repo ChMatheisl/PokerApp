@@ -88,10 +88,10 @@ if choose == "Neues Spiel":
 
     col1, col2, col3 = st.columns([1,1,1])
 
-    if col1.button('Abschicken'):
+    if col2.button('Abschicken'):
         query = f'INSERT INTO "{sheet_url}" VALUES (?, ?, ?, ?)'
         parameter = {'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum}
-        st.dataframe(tuple(parameter.values()))
+        st.dataframe(parameter)
         cursor.execute(query, tuple(parameter.values()))
 
 if choose == "Scoreboard":
@@ -99,8 +99,8 @@ if choose == "Scoreboard":
     col4, col5, col6 = st.columns([1,1,1])
     query = f'SELECT * FROM "{sheet_url}"'
     full = cursor.execute(query)
-    full = pd.DataFrame(full)
-    col6.dataframe(full)
+    full = pd.DataFrame(full).rename(columns={0: 'Name', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
+    col5.dataframe(full)
 
 if choose == "Visuals":
     if "df" not in st.session_state:
