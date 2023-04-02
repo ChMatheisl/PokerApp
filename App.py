@@ -41,7 +41,7 @@ conn = connect(":memory:", adapter_kwargs=adapter_kwargs)
 cursor = conn.cursor()
 sheet_url = st.secrets["private_gsheets_url"]
 query = f'SELECT Spieler FROM "{sheet_url}"'
-st.write(cursor.execute(query))
+st.write(cursor.execute(query).fetchall())
 # sheet_url = st.secrets["private_gsheets_url"]
 # @st.cache_resource(ttl=600)
 # def run_query(query):
