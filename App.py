@@ -23,7 +23,7 @@ choose = option_menu("Poker Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
                          icons=['house', 'camera fill', 'kanban'],
                          menu_icon="app-indicator", default_index=0,
                          orientation='horizontal')
-conn = connect(credentials=credentials)
+conn = connect(":memory:", adapter_kwargs=credentials)
 
 sheet_url = st.secrets["private_gsheets_url"]
 @st.cache_resource(ttl=600)
