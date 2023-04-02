@@ -40,8 +40,7 @@ adapter_kwargs={
 conn = connect(":memory:", adapter_kwargs=adapter_kwargs)
 cursor = conn.cursor()
 sheet_url = st.secrets["private_gsheets_url"]
-query = f'INSERT INTO "{sheet_url}" SELECT "Niko", 10, 20, "31.03.23"'
-cursor.execute(query)
+
 # sheet_url = st.secrets["private_gsheets_url"]
 # @st.cache_resource(ttl=600)
 # def run_query(query):
@@ -84,12 +83,17 @@ if choose == "Neues Spiel":
         'Endstand': abgang,
         'Datum': datum
         }
-   
+    for value in spieler_ergebnis.values():
+        pass
 
     col1, col2, col3 = st.columns([1,1,1])
 
     if col1.button('Abschicken'):
-        st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
+        query = f'INSERT INTO "%(sheet_url)s" SELECT %(name)s, %(einzahlung)s, %(abgang)s, %(datum)s'
+        parameter = {'sheet_url': sheet_url, 'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum }
+        #query = f'INSERT INTO "{sheet_url}" SELECT {name}, {einzahlung}, {abgang}, {datum}'
+        cursor.execute(query, parameter)
+        #st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
 
     if col3.button('Reset Daten'):
         st.session_state['df'] = pd.DataFrame()
