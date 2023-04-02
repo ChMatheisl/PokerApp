@@ -16,12 +16,12 @@ choose = option_menu("Poker Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
                          menu_icon="app-indicator", default_index=0,
                          orientation='horizontal')
 
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-    ],
-)
+# credentials = service_account.Credentials.from_service_account_info(
+#     st.secrets["gcp_service_account"],
+#     scopes=[
+#         "https://www.googleapis.com/auth/spreadsheets",
+#     ],
+# )
 adapter_kwargs={
             "gsheetsapi" : { 
             "service_account_info" : {
@@ -40,7 +40,7 @@ adapter_kwargs={
 conn = connect(":memory:", adapter_kwargs=adapter_kwargs)
 cursor = conn.cursor()
 sheet_url = st.secrets["private_gsheets_url"]
-query = f'SELECT * FROM {sheet_url}'
+query = f'SELECT * FROM "{sheet_url}"'
 cursor.execute(query)
 # sheet_url = st.secrets["private_gsheets_url"]
 # @st.cache_resource(ttl=600)
