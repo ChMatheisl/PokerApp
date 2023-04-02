@@ -81,7 +81,7 @@ if choose == "Neues Spiel":
         'Spieler': name,
         'Einzahlung': einzahlung,
         'Endstand': abgang,
-        'Datum': '30.01.23' #datum
+        'Datum': datum
         }
     for value in spieler_ergebnis.values():
         pass
