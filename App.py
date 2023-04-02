@@ -91,40 +91,13 @@ if choose == "Neues Spiel":
     if col1.button('Abschicken'):
         query = f'INSERT INTO "{sheet_url}" VALUES (?, ?, ?, ?)'
         parameter = {'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum}
-        #query = f'INSERT INTO "{sheet_url}" SELECT {name}, {einzahlung}, {abgang}, {datum}'
-        st.write(tuple(parameter.values()))
+        st.dataframe(tuple(parameter.values()))
         cursor.execute(query, tuple(parameter.values()))
-        #st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
-
-    if col3.button('Reset Daten'):
-        st.session_state['df'] = pd.DataFrame()
-
-    st.table(st.session_state['df'])
 
 if choose == "Scoreboard":
-    if "df" not in st.session_state:
-        st.session_state['df'] = pd.DataFrame()
-
-    # Spieergbenis
-    name = st.text_input('Wer bist du?', 'Niko')
-    einzahlung = st.slider('Wie viel hast du eingezahlt?', 0, 50, 10)
-    abgang = st.slider('Wie viel hast du am Ende mitgenommen?', -50, 50, 10)
-    spieler_ergebnis = { 
-        'Spieler': name,
-        'Einzahlung': einzahlung,
-        'Endstand': abgang,
-        'Datum': datetime.datetime.today()
-        }
-
-    col1, col2, col3 = st.columns([1,1,1])
-
-    if col1.button('Abschicken'):
-        st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
-
-    if col3.button('Reset Daten'):
-        st.session_state['df'] = pd.DataFrame()
-
-    st.table(st.session_state['df'])
+    query = f'SELECT * FROM {sheet_url}'
+    full = cursor.execute(query)
+    st.dataframe(full)
 
 if choose == "Visuals":
     if "df" not in st.session_state:
