@@ -91,12 +91,14 @@ if choose == "Neues Spiel":
     with col1:
         st.write(' ')
 
+    style = "<style>.row-widget.stButton {text-align: center;}</style>"
+    st.markdown(style, unsafe_allow_html=True)
     if col2.button('Abschicken'):
         query = f'INSERT INTO "{sheet_url}" VALUES (?, ?, ?, ?)'
         parameter = {'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum}
         st.dataframe(parameter)
         cursor.execute(query, tuple(parameter.values()))
-        
+
     with col3:
         st.write(' ')
 
