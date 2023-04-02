@@ -27,27 +27,26 @@ def check_password():
             del st.session_state["username"]
         else:
             st.session_state["password_correct"] = False
+            
     
-    if st.button('Login'):
-    
-        if "password_correct" not in st.session_state:
-            # First run, show inputs for username + password.
-            st.text_input("User", on_change=password_entered, key="username")
-            st.text_input(
-                "Passwort", type="password", on_change=password_entered, key="password"
-            )
-            return False
-        elif not st.session_state["password_correct"]:
-            # Password not correct, show input + error.
-            st.text_input("Username", on_change=password_entered, key="username")
-            st.text_input(
-                "Password", type="password", on_change=password_entered, key="password"
-            )
-            st.error("😕 User nicht bekannt oder Passwort falsch")
-            return False
-        else:
-            # Password correct.
-            return True
+    if "password_correct" not in st.session_state:
+        # First run, show inputs for username + password.
+        st.text_input("User", on_change=password_entered, key="username")
+        st.text_input(
+            "Passwort", type="password", on_change=password_entered, key="password"
+        )
+        return False
+    elif not st.session_state["password_correct"]:
+        # Password not correct, show input + error.
+        st.text_input("User", on_change=password_entered, key="username")
+        st.text_input(
+            "Passwort", type="password", on_change=password_entered, key="password"
+        )
+        st.error("😕 User nicht bekannt oder Passwort falsch")
+        return False
+    else:
+        # Password correct.
+        return True
 
 if check_password():
     choose = option_menu("Poker Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
