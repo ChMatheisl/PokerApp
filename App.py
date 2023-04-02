@@ -4,7 +4,9 @@ import datetime
 from streamlit_option_menu import option_menu
 #import gspread
 from google.oauth2 import service_account
-from gsheetsdb import connect
+#from gsheetsdb import connect
+
+from shillelagh.backends.apsw.db import connect
 
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
