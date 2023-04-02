@@ -89,8 +89,8 @@ if choose == "Neues Spiel":
     col1, col2, col3 = st.columns([1,1,1])
 
     if col1.button('Abschicken'):
-        query = 'INSERT INTO "%(sheet_url)s" SELECT %(name)s, %(einzahlung)s, %(abgang)s, %(datum)s'
-        parameter = {'sheet_url': sheet_url, 'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum }
+        query = 'INSERT INTO %(sheet_url)s SELECT %(name)s, %(einzahlung)s, %(abgang)s, %(datum)s'
+        parameter = {'sheet_url': sheet_url, 'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum}
         #query = f'INSERT INTO "{sheet_url}" SELECT {name}, {einzahlung}, {abgang}, {datum}'
         cursor.execute(query, parameter)
         #st.session_state['df'] = pd.concat([st.session_state['df'], pd.DataFrame.from_records([spieler_ergebnis])], ignore_index=True)
