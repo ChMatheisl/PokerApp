@@ -89,7 +89,7 @@ if choose == "Neues Spiel":
     col1, col2, col3 = st.columns([1,1,1])
 
     if col1.button('Abschicken'):
-        query = f'INSERT INTO "%(sheet_url)s" SELECT %(name)s, %(einzahlung)s, %(abgang)s, %(datum)s'
+        query = 'INSERT INTO "%(sheet_url)s" SELECT %(name)s, %(einzahlung)s, %(abgang)s, %(datum)s'
         parameter = {'sheet_url': sheet_url, 'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum }
         #query = f'INSERT INTO "{sheet_url}" SELECT {name}, {einzahlung}, {abgang}, {datum}'
         cursor.execute(query, parameter)
