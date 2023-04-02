@@ -88,11 +88,17 @@ if choose == "Neues Spiel":
 
     col1, col2, col3 = st.columns([1,1,1])
 
+    with col1:
+        st.write(' ')
+
     if col2.button('Abschicken'):
         query = f'INSERT INTO "{sheet_url}" VALUES (?, ?, ?, ?)'
         parameter = {'name': name, 'einzahlung': einzahlung, 'abgang': abgang, 'datum': datum}
         st.dataframe(parameter)
         cursor.execute(query, tuple(parameter.values()))
+        
+    with col3:
+        st.write(' ')
 
 if choose == "Scoreboard":
 
