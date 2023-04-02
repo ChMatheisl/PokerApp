@@ -95,7 +95,7 @@ if choose == "Neues Spiel":
         cursor.execute(query, tuple(parameter.values()))
 
 if choose == "Scoreboard":
-    query = f'SELECT * FROM {sheet_url}'
+    query = f'SELECT * FROM "{sheet_url}"'
     full = cursor.execute(query)
     st.dataframe(full)
 
