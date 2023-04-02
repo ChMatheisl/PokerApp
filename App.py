@@ -116,5 +116,5 @@ if choose == "Visuals":
     full = pd.DataFrame(full).rename(columns={0: 'Spieler', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
     full['Diff'] = full['Einzahlung'] - full['Endstand']
     full = full.groupby('Datum')['Einzahlung'].sum().reset_index()
-    st.table(full)
+    st.subheader('Einzahlung je Datum')
     st.line_chart(full, x='Datum', y='Einzahlung')
