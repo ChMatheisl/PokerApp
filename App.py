@@ -100,7 +100,7 @@ if choose == "Scoreboard":
     query = f'SELECT * FROM "{sheet_url}"'
     full = cursor.execute(query)
     full = pd.DataFrame(full)
-    col5.dataframe(full)
+    col6.dataframe(full)
 
 if choose == "Visuals":
     if "df" not in st.session_state:
