@@ -48,7 +48,7 @@ def check_password():
         return True
 
 if check_password():
-    choose = option_menu("Poker Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
+    choose = option_menu("Tracking", ["Neues Spiel", "Scoreboard", "Visuals"],
                             icons=['house', 'camera fill', 'kanban'],
                             menu_icon="app-indicator", default_index=0,
                             orientation='horizontal')
@@ -147,7 +147,6 @@ if check_password():
         full = pd.DataFrame(full).rename(columns={0: 'Spieler', 1: 'Einzahlung', 2: 'Endstand', 3: 'Datum'})
         full['Δ'] = full['Einzahlung'] - full['Endstand']
 
-        
         
         #1. Visual
         gruppiert = full.groupby('Datum')['Einzahlung'].sum().reset_index()
